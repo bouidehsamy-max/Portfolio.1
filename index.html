@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            background: #000;
+            color: #fff;
+            padding-top: 80px;
+        }
+        .profile-photo {
+    width: 200px;   /* taille plus grande */
+    height: 200px;  /* taille plus grande */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00d4ff;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+        
+
+        /* Menu de navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            transform: translateY(-100px);
+            animation: slideDown 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+        }
+
+        @keyframes slideDown {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1) rotate(-2deg);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInNav 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .nav-menu li:nth-child(1) { animation-delay: 0.7s; }
+        .nav-menu li:nth-child(2) { animation-delay: 0.85s; }
+        .nav-menu li:nth-child(3) { animation-delay: 1s; }
+        .nav-menu li:nth-child(4) { animation-delay: 1.15s; }
+        .nav-menu li:nth-child(5) { animation-delay: 1.3s; }
+
+        @keyframes fadeInNav {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 10px 20px;
+            transition: color 0.3s ease;
+            display: block;
+        }
+
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #ff6b6b);
+            transform: translateX(-50%);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-menu a:hover {
+            color: #00d4ff;
+        }
+
+        .nav-menu a:hover::before {
+            width: 100%;
+        }
+
+        .nav-menu a.active {
+            color: #00d4ff;
+        }
+
+        .nav-menu a.active::before {
+            width: 100%;
+        }
+
+        /* Bouton burger pour mobile */
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .burger span {
+            width: 30px;
+            height: 3px;
+            background: #fff;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .burger.active span:nth-child(1) {
+            transform: rotate(45deg) translateY(12px);
+        }
+
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger.active span:nth-child(3) {
+            transform: rotate(-45deg) translateY(-12px);
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        #canvas-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.8;
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(80px);
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s, transform 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+        }
+
+        section.visible .section-title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: translateX(-80px);
+            transition: opacity 1.1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s, transform 1.1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: default;
+        }
+
+        section.visible .about-content {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .about-content:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.15);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), translate 0.9s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, border-color 0.3s ease;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(60px) scale(0.85);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .skill-icon {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease;
+            filter: brightness(0.9);
+        }
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.2) rotateY(360deg);
+            filter: brightness(1.1) drop-shadow(0 0 20px rgba(0, 212, 255, 0.6));
+        }
+
+        section.visible .skill-card {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        section.visible .skill-card:nth-child(1) {
+            transition-delay: 0.5s;
+        }
+
+        section.visible .skill-card:nth-child(2) {
+            transition-delay: 0.7s;
+        }
+
+        section.visible .skill-card:nth-child(3) {
+            transition-delay: 0.9s;
+        }
+
+        section.visible .skill-card:nth-child(4) {
+            transition-delay: 1.1s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(0, 212, 255, 0.5);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #00d4ff;
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .skill-card:hover h3 {
+            transform: scale(1.1);
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+        }
+
+        .skill-card p {
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover p {
+            transform: scale(1.05);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: transparent;
+            padding: 0;
+            border-radius: 15px;
+            border: none;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(70px);
+            height: 650px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .project-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .project-card:hover .project-card-inner {
+            transform: rotateY(180deg);
+        }
+.profile-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00d4ff;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative; /* nécessaire pour l'animation */
+}
+
+        .project-card-front,
+        .project-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .project-card-front {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .project-card-back {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .project-card-back img,
+        .project-card-back video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-card-back::after {
+            content: ' Cliquez pour voir le projet';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 20px;
+            color: #fff;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        section.visible .project-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section.visible .project-card:nth-child(1) {
+            transition-delay: 0.6s;
+        }
+
+        section.visible .project-card:nth-child(2) {
+            transition-delay: 0.8s;
+        }
+
+        section.visible .project-card:nth-child(3) {
+            transition-delay: 1s;
+        }
+
+        .project-card-front:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+
+        .project-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #f6f6f6;
+            position: relative;
+            z-index: 1;
+        }
+.project-card p {
+    line-height: 1.6;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+    color: #4545fa; 
+}
+.language-switch {
+    position: fixed;
+    top: 90px;
+    left: 30px;
+    display: flex;
+    gap: 10px;
+    z-index: 2000;
+}
+
+.language-switch button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.language-switch img {
+    width: 32px;
+    height: 22px;
+    border-radius: 4px;
+    transition: transform 0.2s ease;
+}
+
+.language-switch img:hover {
+    transform: scale(1.15);
+}
+
+
+.language-switch button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: 2px solid #00d4ff;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.language-switch button:hover {
+    background: #00d4ff;
+    color: #000;
+}
+
+
+        .project-card p {
+            line-height: 1.6;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact {
+            text-align: left;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-top: 60px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-form h3 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 15px 20px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 15px 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            width: fit-content;
+        }
+
+        .submit-btn:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .social-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .social-section h3 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-icon svg,
+        .social-icon img {
+            width: 100%;
+            height: 100%;
+            fill: #fff;
+            filter: brightness(1);
+            transition: filter 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-10px) scale(1.1);
+        }
+
+        .social-icon:hover svg,
+        .social-icon:hover img {
+            filter: brightness(1.5) drop-shadow(0 0 20px rgba(0, 212, 255, 0.8));
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            
+            .contact-form h3,
+            .social-section h3 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu a {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+
+
+    <div id="canvas-container"></div>
+
+    <!-- Menu de navigation -->
+    <nav>
+        
+        <div class="logo">Portfolio</div><ul class="nav-menu">
+            <div class="language-switch">
+    <button id="lang-fr" aria-label="Français">
+        <img src="images/fr.jpg" alt="Français">
+    </button>
+    <button id="lang-en" aria-label="English">
+        <img src="images/uk.png" alt="English">
+    </button>
+</div>
+
+            <li><a href="#home" class="nav-link active">Accueil</a></li>
+            <li><a href="#about" class="nav-link">À Propos</a></li>
+            <li><a href="#skills" class="nav-link">Compétences</a></li>
+            <li><a href="#projects" class="nav-link">Projets</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="content">
+       <header id="home">
+    <img src="images/image.png" alt="Photo de profil" class="profile-photo">
+    <h1>Bouideh Sami</h1>
+    <p class="subtitle">Étudiant en Réseaux et Télécommunications</p>
+</header>
+
+
+        
+
+        <section id="about">
+            <h2 class="section-title">À Propos</h2>
+            <div class="about-content">
+                <p>
+                    Étudiant en première année de BUT Réseaux et Télécommunications, je me forme aux fondamentaux des réseaux et des télécommunications. J’utilise des outils comme Wireshark pour l’analyse de paquets et Cisco Packet Tracer pour la conception et la simulation de réseaux. En complément, je pratique le développement web avec HTML et CSS, ainsi que la programmation en Python pour des scripts simples et des projets pédagogiques. Curieux et motivé, je développe mes compétences à travers des projets pratiques et une approche concrète.
+                </p>
+                <br>
+                <p>
+                    Toujours en quête de nouvelles connaissances, je m'efforce de rester à jour 
+                    avec les dernières tendances technologiques et de créer des projets qui 
+                    repoussent les limites du possible.
+                </p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 id="skills-title" class="section-title">Compétences</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" class="skill-icon">
+                    <h3>HTML</h3>
+                    <p>Je conçois des pages web bien structurées en utilisant les balises HTML sémantiques. J’organise le contenu de manière claire afin d’obtenir des pages lisibles, accessibles et faciles à maintenir..</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" class="skill-icon">
+                    <h3>CSS</h3>
+                    <p>Je sais styliser une page web et gérer la mise en page avec Flexbox et Grid. Je peux rendre un site responsive, ajouter des animations simples et améliorer l’aspect visuel et l’expérience utilisateur.</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" class="skill-icon">
+                    <h3>Linux</h3>
+                    <p> Je travaille dans un environnement Linux en utilisant principalement la ligne de commande. Je gère les fichiers, les permissions et j’ai une compréhension globale du fonctionnement du système et des bases réseau..</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="skill-icon">
+                    <h3>JavaScript</h3>
+                    <p>Je développe des fonctionnalités interactives pour le web. Je manipule le DOM, je gère les événements utilisateur et je rends les pages dynamiques..</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="skill-icon">
+                    <h3>Python</h3>
+                    <p>Je développe des scripts simples en Python pour automatiser des tâches et manipuler des données. J’utilise les bases du langage et je sais lire et comprendre du code existant..</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://www.wireshark.org/assets/icons/wireshark-fin@2x.png" alt="Wireshark" class="skill-icon">
+                    <h3>Wireshark</h3>
+                    <p>Capture et analyse du trafic réseau pour observer le comportement des communications. Lecture et interprétation des protocoles courants afin de comprendre les échanges entre clients et serveurs..</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cisco_logo.svg/200px-Cisco_logo.svg.png" alt="Cisco Packet Tracer" class="skill-icon">
+                    <h3>Cisco Packet Tracer</h3>
+                    <p>Je conçois et simule des réseaux simples. Je configure les adresses IP, les équipements réseau et je vérifie la connectivité et le bon fonctionnement des topologies mises en place..</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="skill-icon">
+                    <h3>Git</h3>
+                    <p>Gestion du versionnement de projets avec suivi précis des modifications. Utilisation des commits, branches et dépôts distants pour organiser le travail et faciliter la collaboration.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Projets</h2>
+            <div class="projects-grid">
+                <a href="https://www.motdepasse.org/" class="project-card" target="_blank">
+                    <div class="project-card-inner">
+                        <div class="project-card-front">
+                            <h3>générateur de mots de passe
+                            </h3>
+                            <p>
+                                Pour ce projet, j’ai conçu et mis en ligne un générateur de mots de passe accessible au public, en prenant en charge toutes les étapes, de l’idée à l’hébergement sur Internet. J’ai veillé à ce que le site soit simple et intuitif, permettant à chacun de générer facilement des mots de passe uniques et sécurisés. Le projet inclut une section expliquant l’importance des mots de passe aléatoires et comment choisir un générateur fiable. Il présente également les meilleures pratiques pour assurer la sécurité des comptes et faciliter leur gestion.
+                            </p>
+                        </div>
+                        <div class="project-card-back">
+    <video autoplay muted loop playsinline>
+        <source src="videos/Tut.mp4" type="video/mp4">
+    </video>
+</div>
+                    </div>
+                </a>
+                
+                <a href="https://github.com/bouidehsamy-max/Quizz_Generator" class="project-card" target="_blank">
+                    <div class="project-card-inner">
+                        <div class="project-card-front">
+                            <h3>Quiz de votre choix </h3>
+                            <p>
+
+                                Ce projet est un quiz interactif en ligne conçu pour tester vos connaissances sur différents thèmes. Il intègre l’API Open Trivia DB pour générer des questions infinies, ce qui permet à l’utilisateur de jouer sans limite. Avant de commencer, l’utilisateur peut choisir un thème de questions grâce à une sélection intuitive, offrant ainsi une expérience personnalisée.
+                            </p>
+                        </div>
+                        <div class="project-card-back">
+    <video autoplay muted loop playsinline>
+        <source src="videos/choix.mp4" type="video/mp4">
+    </video>
+</div>
+                    </div>
+                </a>
+                
+                <a href="https://www.calculette.com/#" class="project-card" target="_blank">
+                    <div class="project-card-inner">
+                        <div class="project-card-front">
+                            <h3>calculatrice</h3>
+                            <p>
+                               J’ai réalisé une calculatrice en ligne entièrement fonctionnelle, accessible depuis n’importe quel navigateur. J’ai pris en charge tout le processus, de l’idée initiale à la mise en ligne sur Internet. L’interface a été pensée pour être intuitive et facile à utiliser, avec des boutons organisés par type de fonction et des touches importantes mises en avant. La calculatrice permet d’effectuer des opérations classiques comme addition, soustraction, multiplication, division, calcul de pourcentage et racine carrée, offrant ainsi un outil pratique pour tous. Ce projet m’a donné l’opportunité de perfectionner mes compétences en design d’interface et en gestion complète d’un projet web.
+                            </p>
+                        </div>
+                        <div class="project-card-back">
+                            <video src="videos/Calc.mp4" alt="Visualisation de Données">
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-container">
+                <div class="contact-form">
+                    <h3>Salut!</h3>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" placeholder="E-MAIL" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Nom" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Votre message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Envoyer </button>
+                    </form>
+                </div>
+                
+                <div class="social-section">
+                    <h3>SOCIAL</h3>
+                    <div class="social-icons">
+                        <a href="https://github.com/bouidehsamy-max" target="_blank" class="social-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                        </a>
+                        
+                
+                        
+                        <a href="https://www.linkedin.com/in/sami-bouideh-75384b386/" target="_blank" class="social-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        
+                        
+                        
+                       <a href="https://mail.google.com/mail/?view=cm&fs=1&to=bouidehsamy@gmail.com" target="_blank" class="social-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/>
+    </svg>
+</a>
+
+</a>
+
+</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Configuration de la scène Three.js
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Création du champ d'étoiles
+        const starGeometry = new THREE.BufferGeometry();
+        const starMaterial = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 2,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const starVertices = [];
+        for (let i = 0; i < 15000; i++) {
+            const x = (Math.random() - 0.5) * 3000;
+            const y = (Math.random() - 0.5) * 3000;
+            const z = (Math.random() - 0.5) * 3000;
+            starVertices.push(x, y, z);
+        }
+
+        starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+        const stars = new THREE.Points(starGeometry, starMaterial);
+        scene.add(stars);
+
+        // Création de météorites
+        const meteorites = [];
+        for (let i = 0; i < 5; i++) {
+            const meteoriteGeometry = new THREE.SphereGeometry(3, 16, 16);
+            const meteoriteMaterial = new THREE.MeshBasicMaterial({
+                color: 0xff6b00,
+                transparent: true,
+                opacity: 0.8
+            });
+            const meteorite = new THREE.Mesh(meteoriteGeometry, meteoriteMaterial);
+            
+            // Position initiale aléatoire
+            meteorite.position.set(
+                Math.random() * 1000 - 500,
+                Math.random() * 1000 - 500,
+                -Math.random() * 500
+            );
+            
+            // Vitesse aléatoire
+            meteorite.velocity = {
+                x: (Math.random() - 0.5) * 5,
+                y: (Math.random() - 0.5) * 5,
+                z: Math.random() * 3 + 2
+            };
+            
+            scene.add(meteorite);
+            meteorites.push(meteorite);
+        }
+
+        camera.position.z = 5;
+
+        // Variables pour l'animation parallax
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Animation des étoiles - rotation lente pour un effet spatial
+            stars.rotation.x += 0.0001;
+            stars.rotation.y += 0.0002;
+            stars.rotation.z += 0.0001;
+
+            // Animation des météorites
+            meteorites.forEach(meteorite => {
+                meteorite.position.x += meteorite.velocity.x;
+                meteorite.position.y += meteorite.velocity.y;
+                meteorite.position.z += meteorite.velocity.z;
+
+                // Réinitialiser la position si la météorite sort de l'écran
+                if (meteorite.position.z > 50) {
+                    meteorite.position.set(
+                        Math.random() * 1000 - 500,
+                        Math.random() * 1000 - 500,
+                        -500
+                    );
+                }
+
+                // Rotation de la météorite
+                meteorite.rotation.x += 0.02;
+                meteorite.rotation.y += 0.01;
+            });
+
+            // Effet parallax avec la souris
+            camera.position.x += (mouseX * 5 - camera.position.x) * 0.05;
+            camera.position.y += (mouseY * 5 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Responsive
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Intersection Observer pour les animations au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    // Retire la classe pour réactiver l'animation quand on scroll up
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observer toutes les sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Navigation menu
+        const burger = document.querySelector('.burger');
+        const navMenu = document.querySelector('.nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Toggle menu mobile
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Smooth scroll et active link
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Fermer le menu mobile
+                burger.classList.remove('active');
+                navMenu.classList.remove('active');
+                
+                // Retirer active de tous les liens
+                navLinks.forEach(l => l.classList.remove('active'));
+                
+                // Ajouter active au lien cliqué
+                link.classList.add('active');
+                
+                // Scroll vers la section
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    const offsetTop = targetSection.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        }); const profilePhoto = document.querySelector('.profile-photo');
+    let position = 0;
+    let direction = 1;
+    
+    function floatPhoto() {
+        position += 0.1 * direction; // vitesse plus lente
+        if (position > 10 || position < -10) direction *= -1; // amplitude plus petite
+        profilePhoto.style.transform = `translateY(${position}px)`;
+        requestAnimationFrame(floatPhoto);
+    }
+
+    floatPhoto();
+
+        // Changer le lien actif au scroll
+        window.addEventListener('scroll', () => {
+            let current = 'home';
+            const sections = document.querySelectorAll('section, header');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });const langButtons = {
+    fr: document.getElementById('lang-fr'),
+    en: document.getElementById('lang-en')
+};
+
+async function loadLanguage(lang) {
+    const response = await fetch(`lang/${lang}.json`);
+    const data = await response.json();
+
+    // Menu
+    document.querySelectorAll('.nav-link').forEach((link, index) => {
+        link.textContent = data.nav[index];
+    });
+
+    // Header
+    document.querySelector('header h1').textContent = data.header.name;
+    document.querySelector('.subtitle').textContent = data.header.subtitle;
+
+    // About
+    document.querySelector('#about .section-title').textContent = data.aboutTitle;
+    const aboutContent = document.querySelector('#about .about-content');
+    aboutContent.innerHTML = '';
+    data.aboutContent.forEach(paragraph => {
+        const p = document.createElement('p');
+        p.textContent = paragraph;
+        aboutContent.appendChild(p);
+    });
+}const contentText = {
+    fr: {
+        about: [
+            "Étudiant en première année de BUT Réseaux et Télécommunications, je me forme aux fondamentaux des réseaux et des télécommunications. J’utilise des outils comme Wireshark pour l’analyse de paquets et Cisco Packet Tracer pour la conception et la simulation de réseaux. En complément, je pratique le développement web avec HTML et CSS, ainsi que la programmation en Python pour des scripts simples et des projets pédagogiques. Curieux et motivé, je développe mes compétences à travers des projets pratiques et une approche concrète.",
+            "Toujours en quête de nouvelles connaissances, je m'efforce de rester à jour avec les dernières tendances technologiques et de créer des projets qui repoussent les limites du possible."
+        ],
+        skills: [
+            "Je conçois des pages web bien structurées en utilisant les balises HTML sémantiques. J’organise le contenu de manière claire afin d’obtenir des pages lisibles, accessibles et faciles à maintenir.",
+            "Je sais styliser une page web et gérer la mise en page avec Flexbox et Grid. Je peux rendre un site responsive, ajouter des animations simples et améliorer l’aspect visuel et l’expérience utilisateur.",
+            "Je travaille dans un environnement Linux en utilisant principalement la ligne de commande. Je gère les fichiers, les permissions et j’ai une compréhension globale du fonctionnement du système et des bases réseau.",
+            "Je développe des fonctionnalités interactives pour le web. Je manipule le DOM, je gère les événements utilisateur et je rends les pages dynamiques.",
+            "Je développe des scripts simples en Python pour automatiser des tâches et manipuler des données. J’utilise les bases du langage et je sais lire et comprendre du code existant.",
+            "Capture et analyse du trafic réseau pour observer le comportement des communications. Lecture et interprétation des protocoles courants afin de comprendre les échanges entre clients et serveurs.",
+            "Je conçois et simule des réseaux simples. Je configure les adresses IP, les équipements réseau et je vérifie la connectivité et le bon fonctionnement des topologies mises en place.",
+            "Gestion du versionnement de projets avec suivi précis des modifications. Utilisation des commits, branches et dépôts distants pour organiser le travail et faciliter la collaboration."
+        ],
+        projects: [
+            "Générateur de mots de passe : Pour ce projet, j’ai conçu et mis en ligne un générateur de mots de passe accessible au public, en prenant en charge toutes les étapes, de l’idée à l’hébergement sur Internet. L’interface est simple et intuitive, permettant à chacun de générer facilement des mots de passe uniques et sécurisés.",
+            "Quiz interactif : Ce projet est un quiz interactif en ligne conçu pour tester vos connaissances sur différents thèmes. Il intègre l’API Open Trivia DB pour générer des questions infinies, ce qui permet à l’utilisateur de jouer sans limite.",
+            "Calculatrice en ligne : J’ai réalisé une calculatrice entièrement fonctionnelle, accessible depuis n’importe quel navigateur. Les boutons sont organisés par type de fonction et les touches importantes sont mises en avant. Elle permet d’effectuer addition, soustraction, multiplication, division, pourcentage et racine carrée."
+        ],
+        contact: {
+            greeting: "Salut!",
+            social: "SOCIAL",
+            emailPlaceholder: "E-MAIL",
+            namePlaceholder: "Nom",
+            messagePlaceholder: "Votre message",
+            sendBtn: "Envoyer"
+        }
+    },
+    en: {
+        about: [
+            "First-year student in Networks and Telecommunications, I am learning the fundamentals of networks and telecommunications. I use tools like Wireshark for packet analysis and Cisco Packet Tracer for network design and simulation. Additionally, I practice web development with HTML and CSS, as well as Python programming for simple scripts and educational projects. Curious and motivated, I develop my skills through practical projects and a hands-on approach.",
+            "Always seeking new knowledge, I strive to stay up-to-date with the latest technological trends and to create projects that push the boundaries of what is possible."
+        ],
+        skills: [
+            "I design well-structured web pages using semantic HTML tags. I organize content clearly to create readable, accessible, and easy-to-maintain pages.",
+            "I can style web pages and manage layouts with Flexbox and Grid. I can make a site responsive, add simple animations, and improve the visual aspect and user experience.",
+            "I work in a Linux environment primarily using the command line. I manage files, permissions, and have a general understanding of the system’s functioning and basic networking.",
+            "I develop interactive features for the web. I manipulate the DOM, handle user events, and make pages dynamic.",
+            "I develop simple Python scripts to automate tasks and manipulate data. I use the language basics and can read and understand existing code.",
+            "Capture and analyze network traffic to observe communication behavior. Read and interpret common protocols to understand client-server exchanges.",
+            "I design and simulate simple networks. I configure IP addresses, network devices, and verify connectivity and proper functioning of the implemented topologies.",
+            "Project version management with precise tracking of changes. Using commits, branches, and remote repositories to organize work and facilitate collaboration."
+        ],
+        projects: [
+            "Password Generator: For this project, I designed and published a password generator accessible to the public, handling all steps from the idea to hosting on the Internet. The interface is simple and intuitive, allowing anyone to easily generate unique and secure passwords.",
+            "Interactive Quiz: This project is an online interactive quiz designed to test your knowledge on various topics. It integrates the Open Trivia DB API to generate infinite questions, allowing the user to play without limits.",
+            "Online Calculator: I created a fully functional online calculator, accessible from any browser. The buttons are organized by function type and important keys are highlighted. It allows performing addition, subtraction, multiplication, division, percentage, and square root."
+        ],
+        contact: {
+            greeting: "Hi!",
+            social: "SOCIAL",
+            emailPlaceholder: "EMAIL",
+            namePlaceholder: "Name",
+            messagePlaceholder: "Your message",
+            sendBtn: "Send"
+        }
+    }
+};
+
+// Sélection des éléments
+const aboutParagraphs = document.querySelectorAll('#about .about-content p');
+const skillCards = document.querySelectorAll('.skill-card');
+const projectCards = document.querySelectorAll('.project-card .project-card-front p');
+const contactGreeting = document.querySelector('.contact-form h3');
+const socialTitle = document.querySelector('.social-section h3');
+const emailInput = document.querySelector('.contact-form input[type="email"]');
+const nameInput = document.querySelector('.contact-form input[type="text"]');
+const messageTextarea = document.querySelector('.contact-form textarea');
+const sendButton = document.querySelector('.submit-btn');
+
+// Boutons de langue
+document.getElementById('lang-fr').addEventListener('click', () => changeLanguage('fr'));
+document.getElementById('lang-en').addEventListener('click', () => changeLanguage('en'));
+
+function changeLanguage(lang) {
+    // À propos
+    aboutParagraphs.forEach((p, i) => p.textContent = contentText[lang].about[i]);
+    
+    // Compétences
+    skillCards.forEach((card, i) => {
+        card.querySelector('p').textContent = contentText[lang].skills[i];
+    });
+    
+    // Projets
+    projectCards.forEach((p, i) => p.textContent = contentText[lang].projects[i]);
+    
+    // Contact & Social
+    contactGreeting.textContent = contentText[lang].contact.greeting;
+    socialTitle.textContent = contentText[lang].contact.social;
+    emailInput.placeholder = contentText[lang].contact.emailPlaceholder;
+    nameInput.placeholder = contentText[lang].contact.namePlaceholder;
+    messageTextarea.placeholder = contentText[lang].contact.messagePlaceholder;
+    sendButton.textContent = contentText[lang].contact.sendBtn;
+}
+
+// Événements des boutons
+langButtons.fr.addEventListener('click', () => loadLanguage('fr'));
+langButtons.en.addEventListener('click', () => loadLanguage('en'));
+
+// Chargement initial
+loadLanguage('fr');
+
+    </script>
+</body>
+</html>
