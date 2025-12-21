@@ -1,0 +1,30 @@
+{
+  "nav": ["Home","About","Skills","Projects","Contact"],
+  "header": {
+    "name": "Sami Bouideh",
+    "subtitle": "Student in Networks and Telecommunications"
+  },
+  "aboutTitle": "About",
+  "aboutContent": [
+    "First-year student in Networks and Telecommunications, I am learning the fundamentals of networks and telecommunications. I use tools like Wireshark for packet analysis and Cisco Packet Tracer for network design and simulation. I also practice web development with HTML and CSS, and write simple Python scripts for educational projects.",
+    "Always seeking new knowledge, I strive to stay up-to-date with the latest technology trends and create projects that push the boundaries of what’s possible."
+  ],
+  "skillsTitle": "Skills",
+  "projectsTitle": "Projects",
+  "projectsContent": [
+    {
+      "title": "Password Generator",
+      "description": "For this project, I designed an online password generator accessible to everyone, covering all steps from the idea to deployment. The interface is simple and intuitive for generating unique and secure passwords."
+    },
+    {
+      "title": "Custom Quiz",
+      "description": "This project is an interactive online quiz designed to test knowledge on various topics. It uses the Open Trivia DB API to generate infinite questions."
+    },
+    {
+      "title": "Calculator",
+      "description": "I created a fully functional online calculator accessible from any browser. The interface is intuitive and includes all standard functions."
+    }
+  ],
+  "contactTitle": "Contact",
+  "contactGreeting": "Hello!"
+}

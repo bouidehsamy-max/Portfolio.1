@@ -1,0 +1,30 @@
+{
+  "nav": ["Accueil","À Propos","Compétences","Projets","Contact"],
+  "header": {
+    "name": "Bouideh Sami",
+    "subtitle": "Étudiant en Réseaux et Télécommunications"
+  },
+  "aboutTitle": "À Propos",
+  "aboutContent": [
+    "Étudiant en première année de BUT Réseaux et Télécommunications, je me forme aux fondamentaux des réseaux et des télécommunications. J’utilise des outils comme Wireshark pour l’analyse de paquets et Cisco Packet Tracer pour la conception et la simulation de réseaux. En complément, je pratique le développement web avec HTML et CSS, ainsi que la programmation en Python pour des scripts simples et des projets pédagogiques. Curieux et motivé, je développe mes compétences à travers des projets pratiques et une approche concrète.",
+    "Toujours en quête de nouvelles connaissances, je m'efforce de rester à jour avec les dernières tendances technologiques et de créer des projets qui repoussent les limites du possible."
+  ],
+  "skillsTitle": "Compétences",
+  "projectsTitle": "Projets",
+  "projectsContent": [
+    {
+      "title": "Générateur de mots de passe",
+      "description": "Pour ce projet, j’ai conçu et mis en ligne un générateur de mots de passe accessible au public, en prenant en charge toutes les étapes, de l’idée à l’hébergement sur Internet. L’interface est simple et intuitive pour créer des mots de passe uniques et sécurisés."
+    },
+    {
+      "title": "Quiz de votre choix",
+      "description": "Ce projet est un quiz interactif en ligne conçu pour tester vos connaissances sur différents thèmes. Il utilise l’API Open Trivia DB pour générer des questions infinies."
+    },
+    {
+      "title": "Calculatrice",
+      "description": "J’ai réalisé une calculatrice en ligne entièrement fonctionnelle, accessible depuis n’importe quel navigateur. L’interface est intuitive et les fonctions classiques sont incluses."
+    }
+  ],
+  "contactTitle": "Contact",
+  "contactGreeting": "Salut !"
+}
