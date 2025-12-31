@@ -1201,26 +1201,42 @@ async function loadLanguage(lang) {
         p.textContent = paragraph;
         aboutContent.appendChild(p);
     });
-}const contentText = {
+}// Contenu multilingue
+const contentText = {
     fr: {
+        nav: ["Accueil", "À Propos", "Compétences", "Projets", "Contact"],
+        header: {
+            subtitle: "Étudiant en Réseaux et Télécommunications"
+        },
+        sectionTitles: {
+            about: "À Propos",
+            skills: "Compétences",
+            projects: "Projets",
+            contact: "Contact"
+        },
         about: [
-            "Étudiant en première année de BUT Réseaux et Télécommunications, je me forme aux fondamentaux des réseaux et des télécommunications. J’utilise des outils comme Wireshark pour l’analyse de paquets et Cisco Packet Tracer pour la conception et la simulation de réseaux. En complément, je pratique le développement web avec HTML et CSS, ainsi que la programmation en Python pour des scripts simples et des projets pédagogiques. Curieux et motivé, je développe mes compétences à travers des projets pratiques et une approche concrète.",
+            "Étudiant en première année de BUT Réseaux et Télécommunications, je me forme aux fondamentaux des réseaux et des télécommunications. J'utilise des outils comme Wireshark pour l'analyse de paquets et Cisco Packet Tracer pour la conception et la simulation de réseaux. En complément, je pratique le développement web avec HTML et CSS, ainsi que la programmation en Python pour des scripts simples et des projets pédagogiques. Curieux et motivé, je développe mes compétences à travers des projets pratiques et une approche concrète.",
             "Toujours en quête de nouvelles connaissances, je m'efforce de rester à jour avec les dernières tendances technologiques et de créer des projets qui repoussent les limites du possible."
         ],
         skills: [
-            "Je conçois des pages web bien structurées en utilisant les balises HTML sémantiques. J’organise le contenu de manière claire afin d’obtenir des pages lisibles, accessibles et faciles à maintenir.",
-            "Je sais styliser une page web et gérer la mise en page avec Flexbox et Grid. Je peux rendre un site responsive, ajouter des animations simples et améliorer l’aspect visuel et l’expérience utilisateur.",
-            "Je travaille dans un environnement Linux en utilisant principalement la ligne de commande. Je gère les fichiers, les permissions et j’ai une compréhension globale du fonctionnement du système et des bases réseau.",
+            "Je conçois des pages web bien structurées en utilisant les balises HTML sémantiques. J'organise le contenu de manière claire afin d'obtenir des pages lisibles, accessibles et faciles à maintenir.",
+            "Je sais styliser une page web et gérer la mise en page avec Flexbox et Grid. Je peux rendre un site responsive, ajouter des animations simples et améliorer l'aspect visuel et l'expérience utilisateur.",
+            "Je travaille dans un environnement Linux en utilisant principalement la ligne de commande. Je gère les fichiers, les permissions et j'ai une compréhension globale du fonctionnement du système et des bases réseau.",
             "Je développe des fonctionnalités interactives pour le web. Je manipule le DOM, je gère les événements utilisateur et je rends les pages dynamiques.",
-            "Je développe des scripts simples en Python pour automatiser des tâches et manipuler des données. J’utilise les bases du langage et je sais lire et comprendre du code existant.",
+            "Je développe des scripts simples en Python pour automatiser des tâches et manipuler des données. J'utilise les bases du langage et je sais lire et comprendre du code existant.",
             "Capture et analyse du trafic réseau pour observer le comportement des communications. Lecture et interprétation des protocoles courants afin de comprendre les échanges entre clients et serveurs.",
             "Je conçois et simule des réseaux simples. Je configure les adresses IP, les équipements réseau et je vérifie la connectivité et le bon fonctionnement des topologies mises en place.",
             "Gestion du versionnement de projets avec suivi précis des modifications. Utilisation des commits, branches et dépôts distants pour organiser le travail et faciliter la collaboration."
         ],
+        projectTitles: [
+            "Générateur de mots de passe",
+            "Quiz de votre choix",
+            "Calculatrice"
+        ],
         projects: [
-            "Générateur de mots de passe : Pour ce projet, j’ai conçu et mis en ligne un générateur de mots de passe accessible au public, en prenant en charge toutes les étapes, de l’idée à l’hébergement sur Internet. L’interface est simple et intuitive, permettant à chacun de générer facilement des mots de passe uniques et sécurisés.",
-            "Quiz interactif : Ce projet est un quiz interactif en ligne conçu pour tester vos connaissances sur différents thèmes. Il intègre l’API Open Trivia DB pour générer des questions infinies, ce qui permet à l’utilisateur de jouer sans limite.",
-            "Calculatrice en ligne : J’ai réalisé une calculatrice entièrement fonctionnelle, accessible depuis n’importe quel navigateur. Les boutons sont organisés par type de fonction et les touches importantes sont mises en avant. Elle permet d’effectuer addition, soustraction, multiplication, division, pourcentage et racine carrée."
+            "Pour ce projet, j'ai conçu et mis en ligne un générateur de mots de passe accessible au public, en prenant en charge toutes les étapes, de l'idée à l'hébergement sur Internet. J'ai veillé à ce que le site soit simple et intuitif, permettant à chacun de générer facilement des mots de passe uniques et sécurisés. Le projet inclut une section expliquant l'importance des mots de passe aléatoires et comment choisir un générateur fiable. Il présente également les meilleures pratiques pour assurer la sécurité des comptes et faciliter leur gestion.",
+            "Ce projet est un quiz interactif en ligne conçu pour tester vos connaissances sur différents thèmes. Il intègre l'API Open Trivia DB pour générer des questions infinies, ce qui permet à l'utilisateur de jouer sans limite. Avant de commencer, l'utilisateur peut choisir un thème de questions grâce à une sélection intuitive, offrant ainsi une expérience personnalisée.",
+            "J'ai réalisé une calculatrice en ligne entièrement fonctionnelle, accessible depuis n'importe quel navigateur. J'ai pris en charge tout le processus, de l'idée initiale à la mise en ligne sur Internet. L'interface a été pensée pour être intuitive et facile à utiliser, avec des boutons organisés par type de fonction et des touches importantes mises en avant. La calculatrice permet d'effectuer des opérations classiques comme addition, soustraction, multiplication, division, calcul de pourcentage et racine carrée, offrant ainsi un outil pratique pour tous. Ce projet m'a donné l'opportunité de perfectionner mes compétences en design d'interface et en gestion complète d'un projet web."
         ],
         contact: {
             greeting: "Salut!",
@@ -1232,6 +1248,16 @@ async function loadLanguage(lang) {
         }
     },
     en: {
+        nav: ["Home", "About", "Skills", "Projects", "Contact"],
+        header: {
+            subtitle: "Student in Networks and Telecommunications"
+        },
+        sectionTitles: {
+            about: "About",
+            skills: "Skills",
+            projects: "Projects",
+            contact: "Contact"
+        },
         about: [
             "First-year student in Networks and Telecommunications, I am learning the fundamentals of networks and telecommunications. I use tools like Wireshark for packet analysis and Cisco Packet Tracer for network design and simulation. Additionally, I practice web development with HTML and CSS, as well as Python programming for simple scripts and educational projects. Curious and motivated, I develop my skills through practical projects and a hands-on approach.",
             "Always seeking new knowledge, I strive to stay up-to-date with the latest technological trends and to create projects that push the boundaries of what is possible."
@@ -1239,17 +1265,22 @@ async function loadLanguage(lang) {
         skills: [
             "I design well-structured web pages using semantic HTML tags. I organize content clearly to create readable, accessible, and easy-to-maintain pages.",
             "I can style web pages and manage layouts with Flexbox and Grid. I can make a site responsive, add simple animations, and improve the visual aspect and user experience.",
-            "I work in a Linux environment primarily using the command line. I manage files, permissions, and have a general understanding of the system’s functioning and basic networking.",
+            "I work in a Linux environment primarily using the command line. I manage files, permissions, and have a general understanding of the system's functioning and basic networking.",
             "I develop interactive features for the web. I manipulate the DOM, handle user events, and make pages dynamic.",
             "I develop simple Python scripts to automate tasks and manipulate data. I use the language basics and can read and understand existing code.",
             "Capture and analyze network traffic to observe communication behavior. Read and interpret common protocols to understand client-server exchanges.",
             "I design and simulate simple networks. I configure IP addresses, network devices, and verify connectivity and proper functioning of the implemented topologies.",
             "Project version management with precise tracking of changes. Using commits, branches, and remote repositories to organize work and facilitate collaboration."
         ],
+        projectTitles: [
+            "Password Generator",
+            "Interactive Quiz",
+            "Calculator"
+        ],
         projects: [
-            "Password Generator: For this project, I designed and published a password generator accessible to the public, handling all steps from the idea to hosting on the Internet. The interface is simple and intuitive, allowing anyone to easily generate unique and secure passwords.",
-            "Interactive Quiz: This project is an online interactive quiz designed to test your knowledge on various topics. It integrates the Open Trivia DB API to generate infinite questions, allowing the user to play without limits.",
-            "Online Calculator: I created a fully functional online calculator, accessible from any browser. The buttons are organized by function type and important keys are highlighted. It allows performing addition, subtraction, multiplication, division, percentage, and square root."
+            "For this project, I designed and published a password generator accessible to the public, handling all steps from the idea to hosting on the Internet. I ensured that the site is simple and intuitive, allowing anyone to easily generate unique and secure passwords. The project includes a section explaining the importance of random passwords and how to choose a reliable generator. It also presents best practices to ensure account security and facilitate their management.",
+            "This project is an online interactive quiz designed to test your knowledge on various topics. It integrates the Open Trivia DB API to generate infinite questions, allowing the user to play without limits. Before starting, the user can choose a question theme through an intuitive selection, thus offering a personalized experience.",
+            "I created a fully functional online calculator, accessible from any browser. I handled the entire process, from the initial idea to publishing on the Internet. The interface was designed to be intuitive and easy to use, with buttons organized by function type and important keys highlighted. The calculator allows performing classic operations such as addition, subtraction, multiplication, division, percentage calculation, and square root, thus providing a practical tool for everyone. This project gave me the opportunity to perfect my skills in interface design and complete web project management."
         ],
         contact: {
             greeting: "Hi!",
@@ -1262,49 +1293,71 @@ async function loadLanguage(lang) {
     }
 };
 
-// Sélection des éléments
-const aboutParagraphs = document.querySelectorAll('#about .about-content p');
-const skillCards = document.querySelectorAll('.skill-card');
-const projectCards = document.querySelectorAll('.project-card .project-card-front p');
-const contactGreeting = document.querySelector('.contact-form h3');
-const socialTitle = document.querySelector('.social-section h3');
-const emailInput = document.querySelector('.contact-form input[type="email"]');
-const nameInput = document.querySelector('.contact-form input[type="text"]');
-const messageTextarea = document.querySelector('.contact-form textarea');
-const sendButton = document.querySelector('.submit-btn');
+// Fonction de changement de langue
+function changeLanguage(lang) {
+    // Menu de navigation
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach((link, i) => {
+        link.textContent = contentText[lang].nav[i];
+    });
 
-// Boutons de langue
+    // Sous-titre du header
+    document.querySelector('.subtitle').textContent = contentText[lang].header.subtitle;
+
+    // Titres des sections
+    document.querySelector('#about .section-title').textContent = contentText[lang].sectionTitles.about;
+    document.querySelector('#skills .section-title').textContent = contentText[lang].sectionTitles.skills;
+    document.querySelector('#projects .section-title').textContent = contentText[lang].sectionTitles.projects;
+    document.querySelector('#contact .section-title').textContent = contentText[lang].sectionTitles.contact;
+
+    // À propos
+    const aboutParagraphs = document.querySelectorAll('#about .about-content p');
+    aboutParagraphs.forEach((p, i) => {
+        if (contentText[lang].about[i]) {
+            p.textContent = contentText[lang].about[i];
+        }
+    });
+    
+    // Compétences
+    const skillCards = document.querySelectorAll('.skill-card');
+    skillCards.forEach((card, i) => {
+        const p = card.querySelector('p');
+        if (p && contentText[lang].skills[i]) {
+            p.textContent = contentText[lang].skills[i];
+        }
+    });
+    
+    // Projets - Titres
+    const projectTitles = document.querySelectorAll('.project-card .project-card-front h3');
+    projectTitles.forEach((h3, i) => {
+        if (contentText[lang].projectTitles[i]) {
+            h3.textContent = contentText[lang].projectTitles[i];
+        }
+    });
+
+    // Projets - Descriptions
+    const projectDescriptions = document.querySelectorAll('.project-card .project-card-front p');
+    projectDescriptions.forEach((p, i) => {
+        if (contentText[lang].projects[i]) {
+            p.textContent = contentText[lang].projects[i];
+        }
+    });
+    
+    // Contact & Social
+    document.querySelector('.contact-form h3').textContent = contentText[lang].contact.greeting;
+    document.querySelector('.social-section h3').textContent = contentText[lang].contact.social;
+    document.querySelector('.contact-form input[type="email"]').placeholder = contentText[lang].contact.emailPlaceholder;
+    document.querySelector('.contact-form input[type="text"]').placeholder = contentText[lang].contact.namePlaceholder;
+    document.querySelector('.contact-form textarea').placeholder = contentText[lang].contact.messagePlaceholder;
+    document.querySelector('.submit-btn').textContent = contentText[lang].contact.sendBtn;
+}
+
+// Événements des boutons de langue
 document.getElementById('lang-fr').addEventListener('click', () => changeLanguage('fr'));
 document.getElementById('lang-en').addEventListener('click', () => changeLanguage('en'));
 
-function changeLanguage(lang) {
-    // À propos
-    aboutParagraphs.forEach((p, i) => p.textContent = contentText[lang].about[i]);
-    
-    // Compétences
-    skillCards.forEach((card, i) => {
-        card.querySelector('p').textContent = contentText[lang].skills[i];
-    });
-    
-    // Projets
-    projectCards.forEach((p, i) => p.textContent = contentText[lang].projects[i]);
-    
-    // Contact & Social
-    contactGreeting.textContent = contentText[lang].contact.greeting;
-    socialTitle.textContent = contentText[lang].contact.social;
-    emailInput.placeholder = contentText[lang].contact.emailPlaceholder;
-    nameInput.placeholder = contentText[lang].contact.namePlaceholder;
-    messageTextarea.placeholder = contentText[lang].contact.messagePlaceholder;
-    sendButton.textContent = contentText[lang].contact.sendBtn;
-}
-
-// Événements des boutons
-langButtons.fr.addEventListener('click', () => loadLanguage('fr'));
-langButtons.en.addEventListener('click', () => loadLanguage('en'));
-
-// Chargement initial
-loadLanguage('fr');
-
+// Langue par défaut au chargement
+changeLanguage('fr');
     </script>
 </body>
 </html>
